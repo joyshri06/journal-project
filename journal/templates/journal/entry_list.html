@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Journal</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f9f6f2;
+      margin: 40px;
+      color: #333;
+    }
+    h1 {
+      color: #444;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+    }
+    .entry {
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    .meta {
+      font-size: 0.9em;
+      color: #777;
+    }
+    a {
+      color: #007acc;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .top-bar {
+      margin-bottom: 20px;
+      font-size: 0.95em;
+    }
+    .new-entry {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    {% if user.is_authenticated %}
+      Logged in as <strong>{{ user.username }}</strong> |
+      <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </div>
+
+  <h1>📘 All Journal Entries</h1>
+
+  <div class="new-entry">
+    <a href="{% url 'entry_new' %}">📝 Write a New Entry</a>
+  </div>
+
+  {% for entry in entries %}
+    <div class="entry">
+      <a href="{% url 'entry_detail' entry.pk %}"><strong>{{ entry.title }}</strong></a>
+      <div class="meta">
+        🗓️ {{ entry.date_created|date:"M d, Y - H:i" }}
+      </div>
+      <div>
+        <a href="{% url 'entry_edit' entry.pk %}">✏️ Edit</a>
+        <a href="{% url 'entry_delete' entry.pk %}">🗑️ Delete</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>No journal entries found. Start by writing your first thoughts 💭</p>
+  {% endfor %}
+
+</body>
+</html>

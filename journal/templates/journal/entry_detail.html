@@ -1,0 +1,21 @@
+{% if user.is_authenticated %}
+  <p>
+    Logged in as <strong>{{ user.username }}</strong> |
+    <a href="{% url 'logout' %}">Logout</a>
+  </p>
+{% else %}
+  <p><a href="{% url 'login' %}">Login</a></p>
+{% endif %}
+
+<hr>
+
+<h2>{{ entry.title }}</h2>
+
+<p>{{ entry.content|linebreaks }}</p>
+
+<p><em>🗓️ Created on {{ entry.date_created|date:"M d, Y - H:i" }}</em></p>
+
+<p>
+  <a href="{% url 'entry_edit' entry.pk %}">✏️ Edit Entry</a> |
+  <a href="{% url 'entry_list' %}">🔙 Back to Entries</a>
+</p>
