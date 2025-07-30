@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-!0!@5=$=$p$n_bywhiyp8v)caohe+21u70r6l53_s289m&@i$4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = ['journal-project-o8ra.onrender.com']
 
 
@@ -58,7 +59,7 @@ import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'journal / templates'],  # ✅ pathlib fix here
+        'DIRS': [BASE_DIR / 'journal/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
